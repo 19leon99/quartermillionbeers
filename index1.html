@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quarter Million Beers</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 640px; margin: 2rem auto; padding: 0 16px; }
+    .stand { font-size: 3rem; font-weight: 700; }
+    .balken { background: #eee; border-radius: 8px; height: 16px; overflow: hidden; }
+    .balken div { background: #e0a100; height: 100%; }
+    li { display: flex; justify-content: space-between; padding: 4px 0; }
+  </style>
+</head>
+<body>
+  <h1>Quarter Million Beers!</h1>
+  <div class="stand" id="stand">…</div>
+  <div class="balken"><div id="fortschritt" style="width:0"></div></div>
+  <p id="info"></p>
+  <h2>Rangliste</h2>
+  <ol id="rangliste"></ol>
+
+  <script>
+    fetch("data.json", { cache: "no-store" })
+      .then(r => r.json())
+      .then(d => {
+        const zahl = n => n.toLocaleString("de-DE");
+        document.getElementById("stand").textContent = zahl(d.stand) + " 🍺";
+        document.getElementById("fortschritt").style.width = (d.stand / d.ziel * 100) + "%";
+        document.getElementById("info").textContent =
+          `${(d.stand / d.ziel * 100).toFixed(2)} % von ${zahl(d.ziel)} · Stand: ` +
+          new Date(d.aktualisiert).toLocaleString("de-DE");
+        document.getElementById("rangliste").innerHTML = d.personen
+          .map(p => `<li><span>${p.name}</span><span>${zahl(p.biere)}</span></li>`)
+          .join("");
+      });
+  </script>
+</body>
+</html>
