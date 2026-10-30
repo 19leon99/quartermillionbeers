@@ -1,0 +1,68 @@
+name: Bierzähler aktualisieren
+
+# Läuft, sobald etwas auf main hochgeladen wird (z. B. ein neuer WhatsApp-Export
+# als .txt oder .zip direkt ins Repo), und lässt sich unter "Actions" auch von
+# Hand starten. Der Export wird danach wieder aus dem Repo entfernt.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write   # posts.json und index.html zurück ins Repo schreiben
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Neue Bier-Posts aus dem Export übernehmen
+        run: |
+          shopt -s nullglob
+          mkdir -p chat
+          # Export darf im Hauptordner oder in chat/ liegen, als .txt oder .zip
+          for z in *.zip chat/*.zip; do unzip -o -j "$z" '*.txt' -d chat/; done
+          for f in *.txt; do cp "$f" chat/; done
+          for f in chat/*.txt; do
+            echo "Verarbeite $f"
+            python scripts/update.py "$f" daten/posts.json
+          done
+          python scripts/build.py daten/posts.json index.html
+          if [ -f daten/pruefen.md ]; then cat daten/pruefen.md >> "$GITHUB_STEP_SUMMARY"; fi
+
+      - name: Ergebnis speichern und Export wieder entfernen
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          shopt -s nullglob
+          for f in chat *.txt *.zip; do
+            git rm -r --cached --quiet --ignore-unmatch "$f"
+            rm -rf "$f"
+          done
+          git add daten index.html
+          git diff --cached --quiet || git commit -m "Bierzähler aktualisiert"
+          git push
+
+      - name: Website bereitstellen
+        run: mkdir -p _site && cp index.html _site/
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
