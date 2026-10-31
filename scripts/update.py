@@ -43,36 +43,56 @@ def name(absender):
 TAGESWECHSEL = 6  # Posts vor 6 Uhr zählen zum vorherigen Abend ("Partytag")
 WOCHENTAGE = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]
 
-ZEILE = re.compile(r"^\[(\d{1,2}\.\d{1,2}\.\d{2,4}), (\d{1,2}:\d{2})(?::\d{2})?\] ([^:]+): ?(.*)$")
-MEDIEN = re.compile(r"(Bild|Video) weggelassen")
+# Beide Export-Formate (je nach Handy-Einstellung):
+#   [30.10.26, 13:07:43] Frido: 2604
+#   [10/30/26, 1:07:43 PM] Frido: <Bild ausgelassen> 2604
+KOPF = r"^\[(\d{1,2}[./]\d{1,2}[./]\d{2,4}), (\d{1,2}:\d{2})(?::\d{2})?(?: ?([AP]M))?\]"
+ZEILE = re.compile(KOPF + r" ([^:]+): ?(.*)$")
+SYSTEM = re.compile(KOPF + r" - ")  # "… hat die Gruppe erstellt" usw.
+MEDIEN = re.compile(r"<?(Bild|Video) (weggelassen|ausgelassen)>?")
 UNSICHTBAR = dict.fromkeys(map(ord, "‎‏⁨⁩﻿"), None)
 
 
 # ---------------------------------------------------------------- Export lesen
 
+def lies_zeit(datum, uhrzeit, ampm):
+    if "/" in datum:  # amerikanisch: Monat/Tag/Jahr
+        monat, tag, jahr = datum.split("/")
+    else:
+        tag, monat, jahr = datum.split(".")
+    jahr = int(jahr) + (2000 if len(jahr) == 2 else 0)
+    stunde, minute = map(int, uhrzeit.split(":"))
+    if ampm:
+        stunde = stunde % 12 + (12 if ampm == "PM" else 0)
+    return datetime(jahr, int(monat), int(tag), stunde, minute)
+
+
 def lies_export(pfad):
     """Liefert Nachrichten als Dicts: zeit, absender, text, medien."""
-    nachrichten = []
+    nachrichten, aktuell = [], None
     with open(pfad, encoding="utf-8") as f:
         for zeile in f:
             zeile = zeile.translate(UNSICHTBAR).replace(" ", " ").rstrip("\n")
+            if SYSTEM.match(zeile):
+                aktuell = None
+                continue
             m = ZEILE.match(zeile)
             if m:
-                datum, uhrzeit, absender, text = m.groups()
-                fmt = "%d.%m.%y %H:%M" if len(datum.split(".")[2]) == 2 else "%d.%m.%Y %H:%M"
-                nachrichten.append({
-                    "zeit": datetime.strptime(f"{datum} {uhrzeit}", fmt),
+                datum, uhrzeit, ampm, absender, text = m.groups()
+                aktuell = {
+                    "zeit": lies_zeit(datum, uhrzeit, ampm),
                     "absender": absender.strip(),
                     "text": text,
-                })
-            elif nachrichten:  # Folgezeile einer mehrzeiligen Nachricht
-                nachrichten[-1]["text"] += "\n" + zeile
+                }
+                nachrichten.append(aktuell)
+            elif aktuell:  # Folgezeile einer mehrzeiligen Nachricht
+                aktuell["text"] += "\n" + zeile
     # WhatsApp sortiert nicht immer streng nach Zeit
     nachrichten.sort(key=lambda n: n["zeit"])
     for n in nachrichten:
         n["medien"] = bool(MEDIEN.search(n["text"]))
         text = MEDIEN.sub("", n["text"])
-        text = text.replace("<Diese Nachricht wurde bearbeitet.>", "")
+        text = re.sub(r"<[^>]*(ausgelassen|weggelassen|bearbeitet)[^>]*>", "", text)
         text = re.sub(r"@\S+", "", text)  # Erwähnungen wie @Nils
         n["text"] = text.strip()
     return nachrichten
