@@ -36,6 +36,10 @@ NAMEN = {
     "Stefan M": "Stefan",
 }
 
+def name(absender):
+    return NAMEN.get(absender, absender.split()[0])
+
+
 TAGESWECHSEL = 6  # Posts vor 6 Uhr zählen zum vorherigen Abend ("Partytag")
 WOCHENTAGE = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]
 
@@ -169,7 +173,7 @@ def bewerte(posts, stand, versatz):
         return min(gut, key=lambda v: (abstand(nummer, k, basis, v), v != erwartet_versatz)) if gut else None
 
     for i, p in enumerate(posts):
-        person = NAMEN.get(p["absender"], p["absender"].split()[0])
+        person = name(p["absender"])
         bemerkung = ""
         if p["nummern"]:
             k = len(p["nummern"])
@@ -295,7 +299,7 @@ def main(export, ziel):
         posts = [p for p in posts
                  if p["zeit"].strftime("%Y-%m-%dT%H:%M") > letzte["zeit"]
                  or (p["zeit"].strftime("%Y-%m-%dT%H:%M") == letzte["zeit"]
-                     and (letzte["zeit"], NAMEN.get(p["absender"], p["absender"])) not in schon_da)]
+                     and (letzte["zeit"], name(p["absender"])) not in schon_da)]
     else:
         stand, versatz = 0, 0
 
@@ -307,7 +311,7 @@ def main(export, ziel):
     with open(pruefen, "w", encoding="utf-8") as f:
         f.write("# Zu prüfen (letztes Update)\n\n")
         for p, grund in unsicher:
-            person = NAMEN.get(p["absender"], p["absender"])
+            person = name(p["absender"])
             f.write(f"- {p['zeit']:%Y-%m-%dT%H:%M} · {person} · „{p['text'][:60]}“ → {grund}\n")
         if not unsicher:
             f.write("Nichts Auffälliges.\n")

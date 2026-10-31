@@ -27,6 +27,7 @@ body{margin:0;background:var(--color-bg);color:var(--color-fg);font-family:var(-
 .bz{font-family:var(--font-anthropic-sans);font-size:var(--cds-font-size-body);display:flex;flex-direction:column;gap:var(--cds-gap-lg)}
 .bz h1{font-weight:var(--cds-font-weight-medium);font-size:var(--cds-font-size-title);margin:0}
 .bz .zeitraum{font-size:var(--cds-font-size-body);color:var(--color-fg-muted);margin:var(--cds-gap-xs) 0 0}
+.bz .aktualisiert{font-size:var(--cds-font-size-body);color:var(--color-fg-muted);margin:var(--cds-gap-xs) 0 0}
 .bz .lead{color:var(--color-fg-muted);font-size:var(--cds-font-size-body);margin:var(--cds-gap-xs) 0 0;max-width:60rem}
 .bz .lead b{font-weight:500;color:var(--color-fg)}
 .bz .tiles{container-type:inline-size;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--cds-gap-md)}
@@ -156,7 +157,7 @@ body{margin:0;background:var(--color-bg);color:var(--color-fg);font-family:var(-
 <div class="bz">
   <header id="kopf">
     <h1>Quarter Million Beers</h1>
-    <p class="zeitraum" data-source="kpis" data-field="zeitraum_txt">—</p>
+    <p class="aktualisiert">Zuletzt aktualisiert: <time id="aktualisiert" datetime="2026-10-30T22:42+01:00">30.10.2026, 22:42 Uhr</time></p>
   </header>
 
   <nav class="tabs" role="tablist" aria-label="Ansicht">
