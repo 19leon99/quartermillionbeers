@@ -8,9 +8,9 @@
   --color-ok:#2f7d4f; --color-warn:#a8660b; --color-bad:#b3362e;
   --cds-chart-grid:#ebe8e1; --cds-chart-axis:#c9c5bc; --cds-chart-muted:#cfcac0; --cds-chart-reference:#8f8a80;
   --cds-surface-popover:#ffffff; --cds-border:#e0dcd4; --cds-shadow-popover:0 4px 16px rgba(0,0,0,.12); --cds-text-secondary:#6b6862;
-  --cds-radius:10px; --cds-pad-xs:4px; --cds-pad-sm:8px; --cds-pad-md:12px; --cds-pad-lg:18px; --cds-pad-xl:28px;
-  --cds-gap-xs:4px; --cds-gap-sm:8px; --cds-gap-md:14px; --cds-gap-lg:22px; --cds-gap-xl:32px;
-  --cds-font-size-caption:12px; --cds-font-size-body:14px; --cds-font-size-heading:16px; --cds-font-size-title:30px; --cds-font-weight-medium:600;
+  --cds-radius:10px; --cds-pad-xs:4px; --cds-pad-sm:8px; --cds-pad-md:12px; --cds-pad-lg:20px; --cds-pad-xl:32px;
+  --cds-gap-xs:4px; --cds-gap-sm:8px; --cds-gap-md:16px; --cds-gap-lg:24px; --cds-gap-xl:32px;
+  --cds-font-size-caption:12px; --cds-font-size-body:14px; --cds-font-size-heading:16px; --cds-font-size-title:30px; --cds-font-weight-medium:500;
   --cds-dur-slow:300ms; --cds-ease-out:cubic-bezier(.2,.8,.2,1);
   --c1:#c2603a; --c2:#3b6fb6; --c3:#4a9a6a; --c4:#b58a1b; --c5:#8a5bb5; --c6:#2b9aa3; --c7:#c24f7d; --c8:#7a7a7a;
 }
@@ -152,6 +152,25 @@ body{margin:0;background:var(--color-bg);color:var(--color-fg);font-family:var(-
 .bz .tile,.bz .card{background:var(--color-panel);border:1px solid transparent;box-shadow:inset 0 1px 3px rgba(0,0,0,.25)}
 .bz th{background:var(--color-panel)}
 .bz .ul-tools input{background:rgba(255,255,255,.06)}
+
+/* unslop-Feinschliff */
+.bz .tile,.bz .card{border:1px solid rgba(243,236,220,.06)!important;box-shadow:none!important;border-radius:12px;padding:20px!important}
+.bz .tile{min-height:128px}
+.bz .card h2{font-size:16px;font-weight:500}
+.bz .card .note{font-size:12px;margin:4px 0 16px}
+.bz .rank{gap:8px!important}
+.bz .rank .rk{color:var(--color-fg-muted)!important;font-weight:400!important}
+.bz .rank .nm,.bz .rank .ct,.bz .top3 .nm{font-weight:500!important}
+.bz .top3 .rk{color:var(--color-fg-muted)}
+.bz .rank .mk.cap{color:var(--color-fg)!important;font-weight:500;display:inline-flex;align-items:center;gap:8px}
+.bz .rank .mk.cap::before{content:"";width:12px;height:12px;flex:none;background:var(--accent);clip-path:polygon(50% 0,61% 9%,75% 4%,79% 18%,93% 21%,90% 35%,100% 45%,92% 57%,98% 71%,84% 77%,80% 91%,66% 89%,57% 100%,46% 92%,32% 98%,26% 84%,12% 81%,14% 66%,2% 58%,9% 45%,0 32%,14% 25%,15% 11%,29% 12%,37% 1%)}
+.bz .tabs button[aria-selected=true]{border-bottom-color:var(--color-fg)}
+.bz .lx-seg button[aria-pressed=true]{box-shadow:none}
+.bz .ms-sub{color:var(--color-fg)!important}
+.bz h1{font-size:28px;font-weight:500;letter-spacing:-0.01em}
+.bz .tile .v{font-weight:500}
+.bz #c-cum{min-height:320px}
+.bz #meilensteine .rank li{grid-template-columns:5.2em 6.5em auto auto!important}
 </style>
 </head><body><div id="dash-root">
 <div class="bz">
@@ -180,7 +199,7 @@ body{margin:0;background:var(--color-bg);color:var(--color-fg);font-family:var(-
   </section>
 
   <section class="card" id="verlauf">
-    <h2>Zeitverlauf: Biere aufsummiert</h2>
+    <h2>Biere seit dem Start</h2>
     <div class="chart" id="c-cum" data-source="cum"></div>
   </section>
 
@@ -199,12 +218,12 @@ body{margin:0;background:var(--color-bg);color:var(--color-fg);font-family:var(-
   <div class="grid">
     <section class="card" id="uhrzeiten">
       <h2>Uhrzeiten</h2>
-      <p class="note">Bier-Posts nach Stunde, von 7 Uhr morgens bis 6 Uhr nachts.</p>
+      <p class="note">Bier-Posts je Stunde, 7 bis 6 Uhr</p>
       <div class="chart" id="c-hour" data-source="per_hour"></div>
     </section>
     <section class="card" id="wochentage">
       <h2>Wochentage</h2>
-      <p class="note">Bier-Posts je Wochentag (Partytag, 6 bis 6 Uhr) – Nachtbiere zählen zum Vorabend.</p>
+      <p class="note">Bier-Posts je Wochentag, Nachtbiere zählen zum Vorabend</p>
       <div class="chart" id="c-wd" data-source="per_wochentag"></div>
     </section>
   </div>
@@ -213,7 +232,7 @@ body{margin:0;background:var(--color-bg);color:var(--color-fg);font-family:var(-
     <div class="lx-head">
       <div>
         <h2>Biere pro Person im Zeitverlauf</h2>
-        <p class="note">Bier-Posts je Person und Kalendertag. Namen in der Legende anklicken, um Personen ein- oder auszublenden.</p>
+        <p class="note">Bier-Posts je Person, Namen in der Legende blenden Linien ein und aus</p>
       </div>
       <div class="lx-seg" role="group" aria-label="Darstellung">
         <button type="button" data-mode="kum" aria-pressed="true">Kumuliert</button>
@@ -229,7 +248,7 @@ body{margin:0;background:var(--color-bg);color:var(--color-fg);font-family:var(-
   <div class="split">
   <section class="card" id="tabelle">
     <h2>Alle Personen im Detail</h2>
-    <p class="note">Spalten zum Sortieren anklicken.</p>
+    <p class="note">Zum Sortieren auf eine Spalte klicken</p>
     <div class="tblwrap">
       <table id="t-person" data-source="per_person" data-row-key="person">
         <thead><tr>
@@ -613,7 +632,7 @@ function drawCum() {
   const el = document.getElementById('c-cum'); const d = dash.data('cum');
   if (d.status !== 'ok') return fail(el, d.status);
   el.innerHTML = ''; const rows = d.data.map(r => ({ ...r, t: new Date(r.zeit) }));
-  const W = el.clientWidth, H = 240, m = { t: 12, r: 16, b: 26, l: 40 };
+  const W = el.clientWidth, H = 320, m = { t: 40, r: 16, b: 28, l: 40 };
   const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
   const x = d3.scaleTime([d3.timeDay.floor(rows[0].t), d3.timeDay.ceil(rows[rows.length - 1].t)], [m.l, W - m.r]);
   const y = d3.scaleLinear([0, d3.max(rows, r => r.kumuliert)], [H - m.b, m.t]).nice();
@@ -624,6 +643,16 @@ function drawCum() {
   svg.append('path').datum(rows).attr('fill', `url(#${gid})`).attr('d', d3.area().curve(d3.curveStepAfter).x(r => x(r.t)).y0(H - m.b).y1(r => y(r.kumuliert)));
   svg.append('path').datum(rows).attr('fill', 'none').attr('stroke', pal()[0]).attr('stroke-width', 2).attr('stroke-linejoin', 'round').attr('stroke-linecap', 'round')
     .attr('d', d3.line().curve(d3.curveStepAfter).x(r => x(r.t)).y(r => y(r.kumuliert)));
+  const cap = (r0) => d3.range(42).map(i => { const a = i / 42 * Math.PI * 2, rr = i % 2 ? r0 : r0 * 0.82; return [Math.cos(a) * rr, Math.sin(a) * rr]; });
+  const msd = dash.data('meilensteine');
+  if (msd.status === 'ok') msd.data.forEach(mk => { const r = rows.find(q => q.kumuliert >= mk.meilenstein); if (!r) return;
+    const g = svg.append('g').attr('transform', `translate(${x(r.t)},${y(r.kumuliert)})`);
+    g.append('polygon').attr('points', cap(9).map(p => p.join(',')).join(' ')).attr('fill', 'var(--accent)');
+    g.append('circle').attr('r', 5).attr('fill', 'none').attr('stroke', 'var(--color-panel)').attr('stroke-opacity', .5);
+    g.append('text').attr('class', 'lbl').attr('x', -8).attr('y', -26).attr('text-anchor', 'end').style('fill', 'var(--color-fg)').text(d3.format(',')(mk.meilenstein));
+    g.append('text').attr('class', 'lbl').attr('x', -8).attr('y', -13).attr('text-anchor', 'end').text(mk.person);
+    g.append('title').text(`${d3.format(',')(mk.meilenstein)}. Bier: ${mk.person}, ${mk.datum}`); });
+  svg.append('text').attr('x', x(rows[rows.length - 1].t) - 10).attr('y', y(rows[rows.length - 1].kumuliert) - 12).attr('text-anchor', 'end').style('fill', 'var(--color-fg)').style('font-size', '20px').style('font-weight', 500).style('font-variant-numeric', 'tabular-nums').text(d3.format(',')(rows[rows.length - 1].kumuliert));
   svg.append('circle').attr('r', 4.5).attr('cx', x(rows[rows.length - 1].t)).attr('cy', y(rows[rows.length - 1].kumuliert)).attr('fill', 'var(--accent)').attr('stroke', 'var(--color-panel)').attr('stroke-width', 2);
   const dot = svg.append('circle').attr('r', 4).attr('fill', 'var(--accent)').style('display', 'none');
   const bis = d3.bisector(r => r.t).left;
@@ -650,10 +679,10 @@ function drawDay() {
   svg.append('g').attr('class', 'weekend').selectAll('rect').data(we).join('rect')
     .attr('x', r => x(r.tag_label) - pad).attr('y', m.t - 6).attr('height', H - m.b - m.t + 6)
     .attr('width', r => { const i = rows.indexOf(r); return (r.tag_label.startsWith('Sa') && rows[i + 1] ? 2 : 1) * x.step(); })
-    .attr('fill', 'var(--accent)').attr('fill-opacity', .09).attr('rx', 3);
+    .attr('fill', 'var(--color-fg)').attr('fill-opacity', .05).attr('rx', 4);
   const lg = svg.append('g').attr('transform', `translate(${W - m.r - 6},${6})`);
   const lt = lg.append('text').attr('class', 'lbl').attr('text-anchor', 'end').attr('y', 4).text('Wochenende (Sa + So)');
-  lg.append('rect').attr('x', -lt.node().getComputedTextLength() - 18).attr('y', -5).attr('width', 12).attr('height', 12).attr('rx', 2).attr('fill', 'var(--accent)').attr('fill-opacity', .18);
+  lg.append('rect').attr('x', -lt.node().getComputedTextLength() - 18).attr('y', -5).attr('width', 12).attr('height', 12).attr('rx', 2).attr('fill', 'var(--color-fg)').attr('fill-opacity', .12);
   const bw = Math.min(32, x.bandwidth()); const off = (x.bandwidth() - bw) / 2;
   const g = svg.append('g').selectAll('g').data(rows).join('g');
   g.append('rect').attr('x', r => x(r.tag_label) + off).attr('width', bw).attr('y', r => y(r.biere)).attr('height', r => y(0) - y(r.biere)).attr('rx', 4).attr('fill', pal()[0]);
@@ -798,7 +827,7 @@ function drawWd() {
   g.append('text').attr('class', 'lbl').attr('text-anchor', 'middle').attr('x', r => x(r.wochentag) + x.bandwidth() / 2).attr('y', r => y(r.posts) - 4).text(r => r.posts);
 }
 
-let ulKey = 'id', ulAsc = true, ulQ = '';
+let ulKey = 'id', ulAsc = false, ulQ = '';
 function drawUrliste() {
   const d = dash.data('urliste'); const tb = document.querySelector('#t-urliste tbody');
   tb.innerHTML = '';
@@ -816,7 +845,7 @@ function drawUrliste() {
 }
 document.getElementById('ul-search').addEventListener('input', e => { ulQ = e.target.value; drawUrliste(); });
 document.querySelectorAll('#t-urliste th').forEach(th => th.addEventListener('click', () => {
-  if (ulKey === th.dataset.field) ulAsc = !ulAsc; else { ulKey = th.dataset.field; ulAsc = true; }
+  if (ulKey === th.dataset.field || (th.dataset.field === 'nr' && ulKey === 'id')) { if (th.dataset.field === 'nr') ulKey = 'nr'; ulAsc = !ulAsc; } else { ulKey = th.dataset.field; ulAsc = th.dataset.field === 'person' || th.dataset.field === 'bemerkung'; }
   drawUrliste();
 }));
 
@@ -826,10 +855,10 @@ function drawSide() {
   if (rt.status === 'ok') rt.data.forEach((r, i) => { const li = document.createElement('li'); li.append(mk('span', 'rk', i + 1), mk('span', 'nm', r.person), mk('span', 'dt', r.tag_label), mk('span', 'ct', r.n)); ol1.appendChild(li); });
   const fk = dash.data('formkurve'), ol2 = document.querySelector('#formkurve .rank'), note = document.querySelector('#formkurve .note'); ol2.innerHTML = '';
   if (fk.status === 'ok' && fk.data.length) { note.textContent = fk.data[0].zeitraum_txt; const mx = fk.data[0].n;
-    fk.data.forEach((r, i) => { const li = document.createElement('li'); const bar = mk('span', 'bar', ''); const fill = mk('span', 'fill', ''); fill.style.width = (r.n / mx * 100) + '%'; fill.style.background = i === 0 ? 'var(--accent)' : pal()[0]; bar.appendChild(fill);
+    fk.data.forEach((r, i) => { const li = document.createElement('li'); const bar = mk('span', 'bar', ''); const fill = mk('span', 'fill', ''); fill.style.width = (r.n / mx * 100) + '%'; fill.style.background = pal()[0]; bar.appendChild(fill);
       li.append(mk('span', 'rk', i + 1), mk('span', 'nm', r.person), bar, mk('span', 'ct', r.n)); ol2.appendChild(li); }); }
   const ms = dash.data('meilensteine'), ol3 = document.querySelector('#meilensteine .rank'); ol3.innerHTML = '';
-  if (ms.status === 'ok') [...ms.data].reverse().forEach(r => { const li = document.createElement('li'); li.append(mk('span', 'mk', d3.format(',')(r.meilenstein)), mk('span', 'nm', r.person), mk('span', 'dt', r.datum), mk('span', 'ct ms-t', 'in ' + r.tage + (r.tage === 1 ? ' Tag' : ' Tagen'))); ol3.appendChild(li); });
+  if (ms.status === 'ok') [...ms.data].reverse().forEach(r => { const li = document.createElement('li'); li.append(mk('span', 'mk cap', d3.format(',')(r.meilenstein)), mk('span', 'nm', r.person), mk('span', 'dt', r.datum), mk('span', 'ct ms-t', 'in ' + r.tage + (r.tage === 1 ? ' Tag' : ' Tagen'))); ol3.appendChild(li); });
 }
 
 function drawMonth() {
@@ -870,7 +899,7 @@ function drawStats() {
   if (se.status === 'ok') se.data.forEach((r, i) => { const li = document.createElement('li'); li.append(mk('span', 'rk', i + 1), mk('span', 'nm', r.person), mk('span', 'dt', fd(r.von) + '–' + fd(r.bis)), mk('span', 'ct', r.n + ' Tage')); ol.appendChild(li); });
   const bars = (id, rows, val, txt, inv) => { const o = document.querySelector(id + ' .rank'); o.innerHTML = ''; if (!rows) return;
     const vs = rows.map(val), mx = Math.max(...vs), mn = Math.min(...vs);
-    rows.forEach((r, i) => { const li = document.createElement('li'); const bar = mk('span', 'bar', ''); const f = mk('span', 'fill', ''); f.style.width = ((inv ? mn / val(r) : val(r) / mx) * 100) + '%'; f.style.background = i === 0 ? 'var(--accent)' : pal()[0]; bar.appendChild(f);
+    rows.forEach((r, i) => { const li = document.createElement('li'); const bar = mk('span', 'bar', ''); const f = mk('span', 'fill', ''); f.style.width = ((inv ? mn / val(r) : val(r) / mx) * 100) + '%'; f.style.background = pal()[0]; bar.appendChild(f);
       li.append(mk('span', 'rk', i + 1), mk('span', 'nm', r.person), bar, mk('span', 'ct', txt(r))); o.appendChild(li); }); };
   const tp = dash.data('tempo'); bars('#tempo', tp.status === 'ok' ? tp.data : null, r => r.minuten, r => r.minuten + ' min', true);
   const pt = dash.data('pro_tag_gruppe'); bars('#pro-tag', pt.status === 'ok' ? pt.data : null, r => r.pro_tag, r => r.pro_tag.toFixed(2).replace('.', ',') + ' · seit ' + fd(r.ab), false);
