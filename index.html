@@ -82,7 +82,7 @@ body{margin:0;background:var(--color-bg);color:var(--color-fg);font-family:var(-
 .bz .top3 .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:clamp(var(--cds-font-size-body),1.6cqi,var(--cds-font-size-heading));font-weight:var(--cds-font-weight-medium)}
 .bz .top3 .ct{font-size:clamp(var(--cds-font-size-body),1.6cqi,var(--cds-font-size-heading));color:var(--color-fg-muted)}
 .bz .pbar{height:8px;border-radius:999px;background:var(--cds-chart-grid);margin-top:var(--cds-gap-sm);overflow:hidden}
-.bz .pbar span{display:block;height:100%;width:0;border-radius:999px;background:var(--c-accent,currentColor);transition:width var(--cds-dur-slow) var(--cds-ease-out)}
+.bz .pbar span{display:block;height:100%;width:100%;transform:scaleX(0);transform-origin:left;border-radius:999px;background:var(--c-accent,currentColor);transition:transform var(--cds-dur-slow) var(--cds-ease-out)}
 .bz svg text{font-family:var(--font-anthropic-sans)}
 .bz #urliste h2{margin-bottom:var(--cds-gap-md)}
 .bz .ul-tools{display:flex;align-items:center;gap:var(--cds-gap-md);flex-wrap:wrap;margin-bottom:var(--cds-gap-sm)}
@@ -149,12 +149,12 @@ body{margin:0;background:var(--color-bg);color:var(--color-fg);font-family:var(-
 <style>/* Farbschema Flaschengrün */
 :root,.bz{--accent:#e07a35;--color-fg:#f3ecdc;--color-fg-muted:#b7b29f;--color-bg:#173122;--color-panel:#11261a;--color-border-line:#11261a;--cds-chart-grid:#1f3a29;--cds-chart-axis:#3c5a46;--cds-chart-muted:#2f4c38;--cds-chart-reference:#b7b29f;--cds-surface-popover:#1f3a29;--cds-border:#11261a;--cds-text-secondary:#b7b29f;--lx-hue:95;--lx-sat:0.45;--lx-l1:0.68;--lx-l2:0.78;--c1:#efe3c4;--c2:#e2b85c;--c3:#9cc78a;--c4:#f7f2e6;--c5:#c9a97a;--c6:#b5d69a;--c7:#e9d39a;--c8:#a8bba8;}
 @media (prefers-color-scheme: dark){:root,.bz{--accent:#e07a35;--color-fg:#f3ecdc;--color-fg-muted:#b7b29f;--color-bg:#173122;--color-panel:#11261a;--color-border-line:#11261a;--cds-chart-grid:#1f3a29;--cds-chart-axis:#3c5a46;--cds-chart-muted:#2f4c38;--cds-chart-reference:#b7b29f;--cds-surface-popover:#1f3a29;--cds-border:#11261a;--cds-text-secondary:#b7b29f;--lx-hue:95;--lx-sat:0.45;--lx-l1:0.68;--lx-l2:0.78;--c1:#efe3c4;--c2:#e2b85c;--c3:#9cc78a;--c4:#f7f2e6;--c5:#c9a97a;--c6:#b5d69a;--c7:#e9d39a;--c8:#a8bba8;}}
-.bz .tile,.bz .card{background:var(--color-panel);border:1px solid transparent;box-shadow:inset 0 1px 3px rgba(0,0,0,.25)}
+.bz .tile,.bz .card{background:var(--color-panel);border:1px solid transparent}
 .bz th{background:var(--color-panel)}
-.bz .ul-tools input{background:rgba(255,255,255,.06)}
+.bz .ul-tools input{background:var(--input-bg)}
 
 /* unslop-Feinschliff */
-.bz .tile,.bz .card{border:1px solid rgba(243,236,220,.06)!important;box-shadow:none!important;border-radius:12px;padding:20px!important}
+.bz .tile,.bz .card{border:1px solid var(--hairline)!important;box-shadow:none!important;border-radius:12px;padding:20px!important}
 .bz .tile{min-height:128px}
 .bz .card h2{font-size:16px;font-weight:500}
 .bz .card .note{font-size:12px;margin:4px 0 16px}
@@ -171,6 +171,19 @@ body{margin:0;background:var(--color-bg);color:var(--color-fg);font-family:var(-
 .bz .tile .v{font-weight:500}
 .bz #c-cum{min-height:320px}
 .bz #meilensteine .rank li{grid-template-columns:5.2em 6.5em auto auto!important}
+
+/* hallmark-floor */
+:root,.bz{--hairline:rgba(243,236,220,.07);--input-bg:rgba(243,236,220,.06);--focus:var(--accent)}
+html,body{overflow-x:clip}
+.bz h1,.bz h2{overflow-wrap:break-word;min-width:0}
+.bz button:focus-visible,.bz th:focus-visible,.bz input:focus-visible,.bz [tabindex]:focus-visible{outline:2px solid var(--focus);outline-offset:2px;transition:none}
+.bz .ul-tools input:focus{outline:none}
+.bz .ul-tools input:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.bz noscript p{color:var(--color-fg-muted)}
+@media (prefers-reduced-motion: reduce){.bz *,.bz *::before{transition:none!important;animation:none!important}}
+.bz #rekordtage .rank li{grid-template-columns:1.2em 6.5em 6.5em 2.5em!important}
+.bz #meilensteine .rank li{grid-template-columns:4.8em 5.4em 6.4em auto!important;column-gap:12px}
+.bz #rekordtage .rank .ct{text-align:right}
 </style>
 </head><body><div id="dash-root">
 <div class="bz">
@@ -333,6 +346,7 @@ body{margin:0;background:var(--color-bg);color:var(--color-fg);font-family:var(-
     </div>
   </section>
   </div>
+  <noscript><p>Die Auswertung braucht JavaScript. Ohne JavaScript bleiben Zahlen und Diagramme leer.</p></noscript>
   <div class="tip" id="tip"></div>
 </div>
 </div>
@@ -550,7 +564,7 @@ dash.calc('naechster_ms', {
     const n30 = posts.filter(r => r.partytag >= f(from)).reduce((s, r) => s + Number(r.biere_im_bild), 0); const rate = n30 / 30;
     const eta = new Date(d0); eta.setDate(eta.getDate() + Math.ceil((ziel - cur) / rate));
     const fd = d => String(d.getDate()).padStart(2, '0') + '.' + String(d.getMonth() + 1).padStart(2, '0') + '.' + d.getFullYear();
-    return [{ ziel, cur, rate, anteil: (cur - (ziel - 500)) / 500, ziel_txt: ziel.toLocaleString('de-DE'), eta_txt: 'voraussichtlich am ' + fd(eta), info_txt: 'noch ' + (ziel - cur) + ' Biere · Tempo der letzten 30 Tage: ' + rate.toFixed(1).replace('.', ',') + ' pro Tag' }];
+    return [{ ziel, cur, rate, anteil: (cur - (ziel - 500)) / 500, ziel_txt: ziel.toLocaleString('de-DE'), eta_txt: 'voraussichtlich am ' + fd(eta), info_txt: 'Noch ' + (ziel - cur) + ' Biere. Tempo der letzten 30 Tage: ' + rate.toFixed(1).replace('.', ',') + ' pro Tag' }];
   }
 });
 dash.calc('per_hour', {
@@ -623,8 +637,8 @@ function fillText() {
     if (pp.status !== 'loading') el.classList.remove('dash-skeleton');
   });
   const pb = document.getElementById('pbar'); const fill = pb.querySelector('span');
-  if (k.status === 'ok' && k.data[0]) { const a = k.data[0].anteil_ziel; fill.style.width = Math.max(a * 100, 0.6) + '%'; fill.style.background = 'var(--accent)'; pb.setAttribute('aria-valuenow', (a * 100).toFixed(2)); }
-  else fill.style.width = '0';
+  if (k.status === 'ok' && k.data[0]) { const a = k.data[0].anteil_ziel; fill.style.transform = `scaleX(${Math.max(a, 0.006)})`; fill.style.background = 'var(--accent)'; pb.setAttribute('aria-valuenow', (a * 100).toFixed(2)); }
+  else fill.style.transform = 'scaleX(0)';
   if (k.status !== 'loading') document.querySelectorAll('.dash-skeleton').forEach(e => e.classList.remove('dash-skeleton'));
 }
 
@@ -659,7 +673,7 @@ function drawCum() {
   svg.append('rect').attr('x', m.l).attr('y', m.t).attr('width', W - m.l - m.r).attr('height', H - m.t - m.b).attr('fill', 'transparent')
     .on('mousemove', ev => { const t = x.invert(d3.pointer(ev)[0]); const i = Math.max(0, Math.min(rows.length - 1, bis(rows, t) - 1)); const r = rows[i];
       dot.style('display', null).attr('cx', x(r.t)).attr('cy', y(r.kumuliert));
-      showTip(ev, el, d3.timeFormat('%d.%m. %H:%M')(r.t) + ' · ' + r.person, r.kumuliert + ' Biere bis hier'); })
+      showTip(ev, el, d3.timeFormat('%d.%m. %H:%M')(r.t) + ', ' + r.person, r.kumuliert + ' Biere bis hier'); })
     .on('mouseleave', () => { dot.style('display', 'none'); hideTip(); });
 }
 
@@ -769,7 +783,7 @@ function drawPerson() {
       rule.style('display', null).attr('x1', x(t0)).attr('x2', x(t0));
       dots.style('display', null).attr('cx', x(t0)).attr('cy', s => y(s.rows[i].v));
       const top = [...series].sort((a, b) => b.rows[i].v - a.rows[i].v).slice(0, 8);
-      tip.innerHTML = ''; const h = document.createElement('div'); h.className = 't'; h.textContent = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'][t0.getDay()] + ' ' + d3.timeFormat('%d.%m.')(t0) + (lxMode === 'kum' ? ' · Summe bis hier' : ' · an diesem Tag'); tip.appendChild(h);
+      tip.innerHTML = ''; const h = document.createElement('div'); h.className = 't'; h.textContent = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'][t0.getDay()] + ' ' + d3.timeFormat('%d.%m.')(t0) + (lxMode === 'kum' ? ', Summe bis hier' : ', an diesem Tag'); tip.appendChild(h);
       top.forEach(s => { const r = document.createElement('div'); const sw = document.createElement('span');
         sw.style.cssText = `display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;background:${color.get(s.p)}`;
         r.appendChild(sw); r.appendChild(document.createTextNode(s.p + ': ' + s.rows[i].v)); tip.appendChild(r); });
@@ -805,7 +819,7 @@ function drawWeek() {
   const g = svg.append('g').selectAll('g').data(rows).join('g');
   g.append('rect').attr('x', r => x(r.woche) + off).attr('width', bw).attr('y', r => y(r.biere)).attr('height', r => y(0) - y(r.biere)).attr('rx', 4)
     .attr('fill', r => r.biere === mx ? 'var(--accent)' : pal()[0])
-    .on('mousemove', (ev, r) => showTip(ev, el, `${lab(r)} · ${span(r.woche)}`, `${r.biere} Biere`)).on('mouseleave', hideTip);
+    .on('mousemove', (ev, r) => showTip(ev, el, `${lab(r)}, ${span(r.woche)}`, `${r.biere} Biere`)).on('mouseleave', hideTip);
   if (x.bandwidth() >= 16) g.append('text').attr('class', 'lbl').attr('text-anchor', 'middle').attr('x', r => x(r.woche) + x.bandwidth() / 2).attr('y', r => y(r.biere) - 5).text(r => r.biere);
 }
 
@@ -844,6 +858,7 @@ function drawUrliste() {
   document.querySelectorAll('#t-urliste th').forEach(th => th.setAttribute('aria-sort', (th.dataset.field === ulKey || (ulKey === 'id' && th.dataset.field === 'nr' && false)) ? (ulAsc ? 'ascending' : 'descending') : 'none'));
 }
 document.getElementById('ul-search').addEventListener('input', e => { ulQ = e.target.value; drawUrliste(); });
+document.querySelectorAll('#t-person th, #t-urliste th').forEach(th => { th.tabIndex = 0; th.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); th.click(); } }); });
 document.querySelectorAll('#t-urliste th').forEach(th => th.addEventListener('click', () => {
   if (ulKey === th.dataset.field || (th.dataset.field === 'nr' && ulKey === 'id')) { if (th.dataset.field === 'nr') ulKey = 'nr'; ulAsc = !ulAsc; } else { ulKey = th.dataset.field; ulAsc = th.dataset.field === 'person' || th.dataset.field === 'bemerkung'; }
   drawUrliste();
@@ -877,7 +892,7 @@ function drawMonth() {
   const g = svg.append('g').selectAll('g').data(rows).join('g');
   g.append('rect').attr('x', r => x(r.monat) + off).attr('width', bw).attr('y', r => y(r.biere)).attr('height', r => y(0) - y(r.biere)).attr('rx', 4)
     .attr('fill', r => r.biere === mx ? 'var(--accent)' : pal()[0])
-    .on('mousemove', (ev, r) => showTip(ev, el, `${r.label} · ${fd(r.von)}–${fd(r.bis)}`, `${d3.format(',')(r.biere)} Biere`)).on('mouseleave', hideTip);
+    .on('mousemove', (ev, r) => showTip(ev, el, `${r.label}, ${fd(r.von)}–${fd(r.bis)}`, `${d3.format(',')(r.biere)} Biere`)).on('mouseleave', hideTip);
   g.append('text').attr('class', 'lbl').attr('text-anchor', 'middle').attr('x', r => x(r.monat) + x.bandwidth() / 2).attr('y', r => y(r.biere) - 5).text(r => d3.format(',')(r.biere));
 }
 let periodMode = 'tag';
@@ -894,7 +909,7 @@ function drawStats() {
   const fd = s => s.slice(8, 10) + '.' + s.slice(5, 7) + '.';
   const ms = dash.data('naechster_ms');
   document.querySelectorAll('#naechster-ms [data-field]').forEach(el => { el.textContent = ms.status === 'ok' ? ms.data[0][el.dataset.field] : '—'; });
-  const fill = document.querySelector('#ms-bar span'); fill.style.width = ms.status === 'ok' ? Math.max(ms.data[0].anteil * 100, 1) + '%' : '0'; fill.style.background = 'var(--accent)';
+  const fill = document.querySelector('#ms-bar span'); fill.style.transform = `scaleX(${ms.status === 'ok' ? Math.max(ms.data[0].anteil, 0.01) : 0})`; fill.style.background = 'var(--accent)';
   const se = dash.data('serie'), ol = document.querySelector('#serie .rank'); ol.innerHTML = '';
   if (se.status === 'ok') se.data.forEach((r, i) => { const li = document.createElement('li'); li.append(mk('span', 'rk', i + 1), mk('span', 'nm', r.person), mk('span', 'dt', fd(r.von) + '–' + fd(r.bis)), mk('span', 'ct', r.n + ' Tage')); ol.appendChild(li); });
   const bars = (id, rows, val, txt, inv) => { const o = document.querySelector(id + ' .rank'); o.innerHTML = ''; if (!rows) return;
@@ -902,7 +917,7 @@ function drawStats() {
     rows.forEach((r, i) => { const li = document.createElement('li'); const bar = mk('span', 'bar', ''); const f = mk('span', 'fill', ''); f.style.width = ((inv ? mn / val(r) : val(r) / mx) * 100) + '%'; f.style.background = pal()[0]; bar.appendChild(f);
       li.append(mk('span', 'rk', i + 1), mk('span', 'nm', r.person), bar, mk('span', 'ct', txt(r))); o.appendChild(li); }); };
   const tp = dash.data('tempo'); bars('#tempo', tp.status === 'ok' ? tp.data : null, r => r.minuten, r => r.minuten + ' min', true);
-  const pt = dash.data('pro_tag_gruppe'); bars('#pro-tag', pt.status === 'ok' ? pt.data : null, r => r.pro_tag, r => r.pro_tag.toFixed(2).replace('.', ',') + ' · seit ' + fd(r.ab), false);
+  const pt = dash.data('pro_tag_gruppe'); bars('#pro-tag', pt.status === 'ok' ? pt.data : null, r => r.pro_tag, r => r.pro_tag.toFixed(2).replace('.', ',') + ' (seit ' + fd(r.ab) + ')', false);
   const el = document.getElementById('c-heat2'), hb = dash.data('hochbetrieb');
   if (hb.status !== 'ok') return fail(el, hb.status);
   el.innerHTML = ''; const W = el.clientWidth, m = { l: 26, t: 4, b: 18 }, rowH = 20, H = m.t + 7 * rowH + m.b;
