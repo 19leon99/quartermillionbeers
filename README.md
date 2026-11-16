@@ -14,6 +14,14 @@ Auswertung des Bier-Zählers der WhatsApp-Gruppe: https://19leon99.github.io/qua
 Was das Skript nicht eindeutig zuordnen konnte, steht in `daten/pruefen.md`
 (und in der Zusammenfassung des Actions-Laufs).
 
+## Korrigierten Export hochladen
+
+Wenn im Export Fehler waren und du die `.txt` von Hand korrigiert hast:
+Datei so umbenennen, dass der Name mit **`korrektur`** beginnt (z. B. `korrektur.txt`),
+und wie oben hochladen. Dann werden alle bisherigen Posts ab der ersten Nachricht
+dieser Datei verworfen und aus der korrigierten Datei neu eingelesen.
+Ältere Posts bleiben unverändert.
+
 ## Von Hand korrigieren
 
 In `daten/korrekturen.json` (wird bei jedem Lauf angewendet):

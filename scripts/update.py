@@ -2,6 +2,10 @@
 
 Aufruf:  python scripts/update.py chat/export.txt daten/posts.json
 
+Heißt die Datei korrektur….txt, werden alle Posts ab der ersten Nachricht
+dieser Datei verworfen und aus der Datei neu ausgewertet (für von Hand
+korrigierte Exporte).
+
 Die bisherigen Einträge in posts.json bleiben unverändert (sie sind von Hand
 geprüft). Nur Posts, die NACH dem letzten Eintrag liegen, werden automatisch
 ausgewertet und angehängt. Unsichere Fälle landen zusätzlich in
@@ -205,6 +209,13 @@ def bewerte(posts, stand, versatz):
                     gepostet = n
                     break
             if v is None:
+                # Tippfehler in der Tausenderstelle ("2142" statt "3142")
+                for t in (1000, -1000, 2000, -2000):
+                    if abstand(gepostet + t, k, stand, versatz) <= 3:
+                        bemerkung = f"Tippfehler, gepostet als {gepostet}"
+                        gepostet, v = gepostet + t, versatz
+                        break
+            if v is None:
                 if (re.fullmatch(r"[\d\s,+&/\-–*]+", p["text"] or "x")
                         and len(str(gepostet)) <= len(str(max(stand, 1)))):
                     # reine Zahl, aber verzählt: Bier zählen, Zähler nicht verschieben
@@ -305,11 +316,18 @@ def korrekturen_anwenden(posts, pfad):
     return posts
 
 
-def main(export, ziel):
+def main(export, ziel, ersetzen=False):
     ziel = Path(ziel)
     bisher = json.loads(ziel.read_text(encoding="utf-8")) if ziel.exists() else []
 
-    posts = zu_posts(lies_export(export))
+    nachrichten = lies_export(export)
+    posts = zu_posts(nachrichten)
+    if ersetzen and nachrichten:
+        # Korrigierter Export: alles ab seiner ersten Nachricht neu auswerten
+        ab = nachrichten[0]["zeit"].strftime("%Y-%m-%dT%H:%M")
+        weg = [b for b in bisher if b["zeit"] >= ab]
+        bisher = [b for b in bisher if b["zeit"] < ab]
+        print(f"Korrektur: {len(weg)} Posts ab {ab} werden neu eingelesen")
     if bisher:
         letzte = bisher[-1]
         stand = int(letzte["nummer_korr"])
@@ -341,4 +359,5 @@ def main(export, ziel):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1], sys.argv[2])
+    # Dateiname beginnt mit "korrektur": ersetzt alle Posts ab der ersten Nachricht
+    main(sys.argv[1], sys.argv[2], Path(sys.argv[1]).name.lower().startswith("korrektur"))

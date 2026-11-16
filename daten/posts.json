@@ -28151,10 +28151,10 @@
 "woche": "2026-11-02",
 "stunde": "13",
 "person": "Ruff",
-"nummer": "1935",
-"biere_im_bild": "0",
-"nummer_korr": "2934",
-"bemerkung": "Nummer passt nicht (gepostet 1935), als 1 Bier gezählt",
+"nummer": "2935",
+"biere_im_bild": "1",
+"nummer_korr": "2935",
+"bemerkung": "Tippfehler, gepostet als 1935",
 "biere_gezaehlt": "1"
 },
 {
@@ -28164,10 +28164,10 @@
 "woche": "2026-11-02",
 "stunde": "14",
 "person": "Ruff",
-"nummer": "1936",
-"biere_im_bild": "0",
-"nummer_korr": "2934",
-"bemerkung": "Nummer passt nicht (gepostet 1936), als 1 Bier gezählt",
+"nummer": "2936",
+"biere_im_bild": "1",
+"nummer_korr": "2936",
+"bemerkung": "Tippfehler, gepostet als 1936",
 "biere_gezaehlt": "1"
 },
 {
@@ -28178,10 +28178,10 @@
 "stunde": "15",
 "person": "Basti",
 "nummer": "2937",
-"biere_im_bild": "3",
+"biere_im_bild": "1",
 "nummer_korr": "2937",
 "bemerkung": "",
-"biere_gezaehlt": "3"
+"biere_gezaehlt": "1"
 },
 {
 "zeit": "2026-11-06T16:07",
@@ -28983,10 +28983,10 @@
 "woche": "2026-11-02",
 "stunde": "10",
 "person": "Jonas",
-"nummer": "2010",
-"biere_im_bild": "0",
-"nummer_korr": "3009",
-"bemerkung": "Nummer passt nicht (gepostet 2010), als 1 Bier gezählt",
+"nummer": "3010",
+"biere_im_bild": "1",
+"nummer_korr": "3010",
+"bemerkung": "Tippfehler, gepostet als 2010",
 "biere_gezaehlt": "1"
 },
 {
@@ -28997,10 +28997,10 @@
 "stunde": "10",
 "person": "Jonas",
 "nummer": "3011",
-"biere_im_bild": "2",
+"biere_im_bild": "1",
 "nummer_korr": "3011",
 "bemerkung": "",
-"biere_gezaehlt": "2"
+"biere_gezaehlt": "1"
 },
 {
 "zeit": "2026-11-07T11:00",
@@ -29360,10 +29360,10 @@
 "woche": "2026-11-02",
 "stunde": "19",
 "person": "Collin",
-"nummer": "2039",
-"biere_im_bild": "0",
-"nummer_korr": "3039",
-"bemerkung": "Nummer passt nicht (gepostet 2039), als 1 Bier gezählt",
+"nummer": "3039",
+"biere_im_bild": "1",
+"nummer_korr": "3040",
+"bemerkung": "Tippfehler, gepostet als 2039",
 "biere_gezaehlt": "1"
 },
 {
@@ -29374,7 +29374,7 @@
 "stunde": "19",
 "person": "Felix",
 "nummer": "3040",
-"biere_im_bild": "1",
+"biere_im_bild": "0",
 "nummer_korr": "3040",
 "bemerkung": "",
 "biere_gezaehlt": "1"
@@ -30608,23 +30608,10 @@
 "woche": "2026-11-02",
 "stunde": "19",
 "person": "Philipp",
-"nummer": "3141",
-"biere_im_bild": "2",
-"nummer_korr": "3141",
-"bemerkung": "",
-"biere_gezaehlt": "2"
-},
-{
-"zeit": "2026-11-08T19:22",
-"partytag": "2026-11-08",
-"tag_label": "So 08.11.",
-"woche": "2026-11-02",
-"stunde": "19",
-"person": "Philipp",
 "nummer": "3142",
 "biere_im_bild": "1",
-"nummer_korr": "3142",
-"bemerkung": "",
+"nummer_korr": "3140",
+"bemerkung": "Tippfehler, gepostet als 2142",
 "biere_gezaehlt": "1"
 },
 {
@@ -30636,8 +30623,8 @@
 "person": "Stefan",
 "nummer": "3143",
 "biere_im_bild": "1",
-"nummer_korr": "3143",
-"bemerkung": "",
+"nummer_korr": "3141",
+"bemerkung": "Tippfehler, gepostet als 2143",
 "biere_gezaehlt": "1"
 },
 {
@@ -30648,10 +30635,10 @@
 "stunde": "19",
 "person": "Sensor",
 "nummer": "3144",
-"biere_im_bild": "1",
+"biere_im_bild": "3",
 "nummer_korr": "3144",
 "bemerkung": "",
-"biere_gezaehlt": "1"
+"biere_gezaehlt": "3"
 },
 {
 "zeit": "2026-11-08T19:53",
@@ -31622,9 +31609,9 @@
 "woche": "2026-11-09",
 "stunde": "2",
 "person": "Janis",
-"nummer": "3228",
-"biere_im_bild": "1",
-"nummer_korr": "3228",
+"nummer": "3227",
+"biere_im_bild": "0",
+"nummer_korr": "3227",
 "bemerkung": "",
 "biere_gezaehlt": "1"
 },
@@ -31636,7 +31623,7 @@
 "stunde": "12",
 "person": "Julian",
 "nummer": "3228",
-"biere_im_bild": "0",
+"biere_im_bild": "1",
 "nummer_korr": "3228",
 "bemerkung": "",
 "biere_gezaehlt": "1"
@@ -32909,10 +32896,10 @@
 "woche": "2026-11-09",
 "stunde": "0",
 "person": "Tim",
-"nummer": "2329",
-"biere_im_bild": "0",
-"nummer_korr": "3328",
-"bemerkung": "Nummer passt nicht (gepostet 2329), als 1 Bier gezählt",
+"nummer": "3329",
+"biere_im_bild": "1",
+"nummer_korr": "3329",
+"bemerkung": "Tippfehler, gepostet als 2329",
 "biere_gezaehlt": "1"
 },
 {
@@ -32923,10 +32910,10 @@
 "stunde": "0",
 "person": "Rentschi",
 "nummer": "3330",
-"biere_im_bild": "2",
+"biere_im_bild": "1",
 "nummer_korr": "3330",
 "bemerkung": "",
-"biere_gezaehlt": "2"
+"biere_gezaehlt": "1"
 },
 {
 "zeit": "2026-11-14T00:39",
@@ -33741,10 +33728,10 @@
 "woche": "2026-11-09",
 "stunde": "20",
 "person": "Julian",
-"nummer": "3390",
-"biere_im_bild": "-4",
-"nummer_korr": "3390",
-"bemerkung": "Gruppe setzt den Zähler auf 3390 zurück",
+"nummer": "3395",
+"biere_im_bild": "1",
+"nummer_korr": "3395",
+"bemerkung": "",
 "biere_gezaehlt": "1"
 },
 {
@@ -33754,9 +33741,9 @@
 "woche": "2026-11-09",
 "stunde": "20",
 "person": "Basti",
-"nummer": "3391",
+"nummer": "3396",
 "biere_im_bild": "1",
-"nummer_korr": "3391",
+"nummer_korr": "3396",
 "bemerkung": "",
 "biere_gezaehlt": "1"
 },
@@ -33767,9 +33754,9 @@
 "woche": "2026-11-09",
 "stunde": "20",
 "person": "Ruff",
-"nummer": "3392",
+"nummer": "3397",
 "biere_im_bild": "1",
-"nummer_korr": "3392",
+"nummer_korr": "3397",
 "bemerkung": "",
 "biere_gezaehlt": "1"
 },
@@ -33780,9 +33767,9 @@
 "woche": "2026-11-09",
 "stunde": "21",
 "person": "Sensor",
-"nummer": "3393",
+"nummer": "3398",
 "biere_im_bild": "1",
-"nummer_korr": "3393",
+"nummer_korr": "3398",
 "bemerkung": "",
 "biere_gezaehlt": "1"
 },
@@ -33794,10 +33781,10 @@
 "stunde": "21",
 "person": "Ruff",
 "nummer": "3399",
-"biere_im_bild": "6",
+"biere_im_bild": "1",
 "nummer_korr": "3399",
 "bemerkung": "",
-"biere_gezaehlt": "6"
+"biere_gezaehlt": "1"
 },
 {
 "zeit": "2026-11-14T21:47",
@@ -33949,9 +33936,9 @@
 "woche": "2026-11-09",
 "stunde": "23",
 "person": "Julian",
-"nummer": "3410",
-"biere_im_bild": "0",
-"nummer_korr": "3410",
+"nummer": "3411",
+"biere_im_bild": "1",
+"nummer_korr": "3411",
 "bemerkung": "",
 "biere_gezaehlt": "1"
 },
@@ -33963,10 +33950,10 @@
 "stunde": "23",
 "person": "Sensor",
 "nummer": "3412",
-"biere_im_bild": "2",
+"biere_im_bild": "1",
 "nummer_korr": "3412",
 "bemerkung": "",
-"biere_gezaehlt": "2"
+"biere_gezaehlt": "1"
 },
 {
 "zeit": "2026-11-14T23:34",
@@ -34079,10 +34066,10 @@
 "woche": "2026-11-09",
 "stunde": "2",
 "person": "Collin",
-"nummer": "3410",
-"biere_im_bild": "-11",
-"nummer_korr": "3410",
-"bemerkung": "Gruppe setzt den Zähler auf 3410 zurück",
+"nummer": "3422",
+"biere_im_bild": "1",
+"nummer_korr": "3422",
+"bemerkung": "",
 "biere_gezaehlt": "1"
 },
 {
@@ -34092,9 +34079,9 @@
 "woche": "2026-11-09",
 "stunde": "2",
 "person": "Collin",
-"nummer": "3411",
+"nummer": "3423",
 "biere_im_bild": "1",
-"nummer_korr": "3411",
+"nummer_korr": "3423",
 "bemerkung": "",
 "biere_gezaehlt": "1"
 },
@@ -34106,7 +34093,7 @@
 "stunde": "16",
 "person": "Rentschi",
 "nummer": "3424",
-"biere_im_bild": "13",
+"biere_im_bild": "1",
 "nummer_korr": "3424",
 "bemerkung": "",
 "biere_gezaehlt": "1"
@@ -34209,22 +34196,9 @@
 "woche": "2026-11-09",
 "stunde": "19",
 "person": "Ruff",
-"nummer": "3427",
-"biere_im_bild": "-4",
-"nummer_korr": "3427",
-"bemerkung": "Gruppe setzt den Zähler auf 3427 zurück",
-"biere_gezaehlt": "1"
-},
-{
-"zeit": "2026-11-15T19:25",
-"partytag": "2026-11-15",
-"tag_label": "So 15.11.",
-"woche": "2026-11-09",
-"stunde": "19",
-"person": "Ruff",
-"nummer": "3428",
+"nummer": "3432",
 "biere_im_bild": "1",
-"nummer_korr": "3428",
+"nummer_korr": "3432",
 "bemerkung": "",
 "biere_gezaehlt": "1"
 },
@@ -34235,9 +34209,22 @@
 "woche": "2026-11-09",
 "stunde": "19",
 "person": "Ruff",
-"nummer": "3429",
+"nummer": "3433",
 "biere_im_bild": "1",
-"nummer_korr": "3429",
+"nummer_korr": "3433",
+"bemerkung": "",
+"biere_gezaehlt": "1"
+},
+{
+"zeit": "2026-11-15T19:25",
+"partytag": "2026-11-15",
+"tag_label": "So 15.11.",
+"woche": "2026-11-09",
+"stunde": "19",
+"person": "Ruff",
+"nummer": "3434",
+"biere_im_bild": "1",
+"nummer_korr": "3434",
 "bemerkung": "",
 "biere_gezaehlt": "1"
 }
